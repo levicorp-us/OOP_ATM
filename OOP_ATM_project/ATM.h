@@ -10,13 +10,16 @@ class Transaction;
 using namespace std;
 
 class ATM {
-private:
+protected:
+    InteractiveDisplay* display;
+    static int numOfBanks;
     static Bank** All_Banks;
     int serial_number;
-    int atm_cash; // transaction 진행 시 갱신
+    Money* atm_cash; // transaction 진행 시 갱신
     Bank* primary_bank;
     //card를 가져와서 정보들을 어디로 가져다 놓는가
-    Transaction* history;
+    Log** history;
+    int hisIndex; // exclusive. (=len(history))
     int cashLimit; // transaction 진행 시 고려
     int checkLimit; // transaction 진행 시 고려
 public:
@@ -29,7 +32,8 @@ public:
     virtual void deposit(string accNum);
     virtual void withdrawal(string accNum);
     virtual void transfer(string accNum);
-    virtual void printLog();
+    void printLog();
+    Bank* findBank(string bankName);
 };
 
 
@@ -43,12 +47,12 @@ public:
     void deposit(string accNum);
     void withdrawal(string accNum);
     void transfer(string accNum);
-    void printLog();
 };
 
 class ATMMB : public ATM {
 private:
     bool isEng;
+
 public:
     void choose_language();
     void checkPW(string accNum);
@@ -59,7 +63,6 @@ public:
     void deposit(string accNum);
     void withdrawal(string accNum);
     void transfer(string accNum);
-    void printLog();
 };
 
 class ATMSU : public ATM {
@@ -72,7 +75,6 @@ public:
     void deposit(string accNum);
     void withdrawal(string accNum);
     void transfer(string accNum);
-    void printLog();
 };
 
 class ATMSB : public ATM {
@@ -88,5 +90,4 @@ public:
     void deposit(string accNum);
     void withdrawal(string accNum);
     void transfer(string accNum);
-    void printLog();
 };

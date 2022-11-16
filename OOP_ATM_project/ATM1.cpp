@@ -2,138 +2,140 @@
 #include <iostream>
 using namespace std;
 
-void ATMSB::Deposit(int amount, string accNum)
-{
-	bool isCash = true;
-	if (this->isEnglish)
-	{
-		/*isCash = engDis->checkorcash()*/
-	}
-	else
-	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
+#define paperCashLimit	50
+#define paperCheckLimit 30
 
+Bank* ATM::findBank(string bankName)
+{
+	for(int i=0; i < numOfBanks; i++)
+	{
+		if (bankName == All_Banks[i]->getBankName())
+		{
+			return All_Banks[i];
+		}
 	}
 }
 
-void ATMMB::Deposit(int amount, string accNum)
+void ATMSB::deposit(string accNum)
 {
-	bool isCash = true;
-	if (this->isEnglish)
+	bool isCash;
+	string acc = accNum;
+	isCash = display->cashCheck();
+	if (isCash)
 	{
-		/*isCash = engDis->checkorcash()*/
+		Cash* don;
+		don = display->getCash();
+		if (don->getTotal() > cashLimit) {cout << "Error" << endl;}
+		if (don->getPaperNum() > paperCashLimit) { cout << "Error" << endl; }
+		primary_bank->getAcc(accNum)->edit_acc_fund(don->getAmount());
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, don->getAmount(), 1);
+		this->atm_cash += don->getAmount();
 	}
 	else
 	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
-
+		Check* supyo;
+		supyo = display->getCheck();
+		if (supyo->amount > checkLimit) {cout << "Error" << endl;}
+		primary_bank->getAcc(accNum)->edit_acc_fund(supyo->amount);
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, supyo->amount, 1);
 	}
 }
 
-void ATMSU::Deposit(int amount, string accNum)
+void ATMMB::deposit(string accNum)
 {
-	bool isCash = true;
-	if (this->isEnglish)
+	bool isCash;
+	string acc = accNum;
+	isCash = display->cashCheck();
+	if (isCash)
 	{
-		/*isCash = engDis->checkorcash()*/
+		Cash* don;
+		don = display->getCash();
+		if (don->getTotal() > cashLimit) { cout << "Error" << endl; }
+		if (don->getPaperNum() > paperCashLimit) { cout << "Error" << endl; }
+		primary_bank->getAcc(accNum)->edit_acc_fund(don->getAmount());
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, don->getAmount(), 1);
+		this->atm_cash += don->getAmount();
 	}
 	else
 	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
-
+		Check* supyo;
+		supyo = display->getCheck();
+		if (supyo->amount > checkLimit) { cout << "Error" << endl; }
+		primary_bank->getAcc(accNum)->edit_acc_fund(supyo->amount);
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, supyo->amount, 1);
 	}
 }
 
-void ATMMU::Deposit(int amount, string accNum)
+void ATMSU::deposit(string accNum)
 {
-	bool isCash = true;
-	if (this->isEnglish)
+	bool isCash;
+	string acc = accNum;
+	isCash = display->cashCheck();
+	if (isCash)
 	{
-		/*isCash = engDis->checkorcash()*/
+		Cash* don;
+		don = display->getCash();
+		if (don->getTotal() > cashLimit) { cout << "Error" << endl; }
+		if (don->getPaperNum() > paperCashLimit) { cout << "Error" << endl; }
+		primary_bank->getAcc(accNum)->edit_acc_fund(don->getAmount());
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, don->getAmount(), 1);
+		this->atm_cash += don->getAmount();
 	}
 	else
 	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
-
+		Check* supyo;
+		supyo = display->getCheck();
+		if (supyo->amount > checkLimit) { cout << "Error" << endl; }
+		primary_bank->getAcc(accNum)->edit_acc_fund(supyo->amount);
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, supyo->amount, 1);
 	}
 }
 
-void ATMSB::Deposit(int amount, string accNum)
+void ATMMU::deposit(string accNum)
 {
-	bool isCash = true;
-	if (this->isEnglish)
+	bool isCash;
+	string acc = accNum;
+	isCash = display->cashCheck();
+	if (isCash)
 	{
-		/*isCash = engDis->checkorcash()*/
+		Cash* don;
+		don = display->getCash();
+		if (don->getTotal() > cashLimit) { cout << "Error" << endl; }
+		if (don->getPaperNum() > paperCashLimit) { cout << "Error" << endl; }
+		primary_bank->getAcc(accNum)->edit_acc_fund(don->getAmount());
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, don->getAmount(), 1);
+		this->atm_cash += don->getAmount();
 	}
 	else
 	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
-
+		Check* supyo;
+		supyo = display->getCheck();
+		if (supyo->amount > checkLimit) { cout << "Error" << endl; }
+		primary_bank->getAcc(accNum)->edit_acc_fund(supyo->amount);
+		history[hisIndex] = new Log((serial_number + hisIndex), acc, supyo->amount, 1);
 	}
 }
 
-void ATMMB::Deposit(int amount, string accNum)
+void ATMSB::withdrawal(string accNum)
 {
-	bool isCash = true;
-	if (this->isEnglish)
-	{
-		/*isCash = engDis->checkorcash()*/
-	}
-	else
-	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
+	Bank* targetBank{ findBank(accNum) };
+	int amount;
+	cout << "Amount to deposit?\n:" << endl;
+	cin >> amount;
 
-	}
 }
 
-void ATMSU::Deposit(int amount, string accNum)
+void ATMMB::withdrawal(string accNum)
 {
-	bool isCash = true;
-	if (this->isEnglish)
-	{
-		/*isCash = engDis->checkorcash()*/
-	}
-	else
-	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
 
-	}
 }
 
-void ATMMU::Deposit(int amount, string accNum)
+void ATMSU::withdrawal(string accNum)
 {
-	bool isCash = true;
-	if (this->isEnglish)
-	{
-		/*isCash = engDis->checkorcash()*/
-	}
-	else
-	{
-		/*isCash = krDis->checkorcash()*/
-	}
-	if (isCash)
-	{
 
-	}
+}
+
+void ATMMU::withdrawal(string accNum)
+{
+
 }

@@ -14,6 +14,5 @@ class Bank {
         Bank(string bankname, Account** acclist, int acc_len);
         Account* getAcc(string accnum); // Acc 못찾으면 nullptr 반환
         string getAccPW(string accnum); // Acc 못찾으면 0 반환
-
         void showAccounts(); // test용
 };

@@ -9,7 +9,7 @@ ATM::ATM(int serial_num, int cash, Bank* mybank, bool bilang) {
 	//history = new Transaction()	
 }
 
-void ATMMU::checkPW(string inputPW, string accNum)
+void ATMMU::checkPW(string accNum)
 {
 	string PW = this->primary_bank->getAccPW(accNum);
 	if (PW == inputPW)
@@ -22,7 +22,7 @@ void ATMMU::checkPW(string inputPW, string accNum)
 	}
 }
 
-void ATMMB::checkPW(string inputPW, string accNum)
+void ATMMB::checkPW(string accNum)
 {
 	string PW = this->primary_bank->getAccPW(accNum);
 	if (PW == inputPW)
@@ -35,7 +35,7 @@ void ATMMB::checkPW(string inputPW, string accNum)
 	}
 }
 
-void ATMSU::checkPW(string inputPW, string accNum)
+void ATMSU::checkPW(string accNum)
 {
 	string PW = this->primary_bank->getAccPW(accNum);
 	if (PW == inputPW)
@@ -48,7 +48,7 @@ void ATMSU::checkPW(string inputPW, string accNum)
 	}
 }
 
-void ATMSB::checkPW(string inputPW, string accNum)
+void ATMSB::checkPW(string accNum)
 {
 	string PW = this->primary_bank->getAccPW(accNum);
 	if (PW == inputPW)

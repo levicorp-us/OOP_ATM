@@ -1,6 +1,6 @@
 #include "Log.h"
 
-Transaction::Transaction(int idnum, int card_num, int quantity, int mode)
+Log::Log(int idnum, string card_num, int quantity, int mode)
 {
 	ID = idnum;
 	card_number = card_num;
@@ -8,23 +8,23 @@ Transaction::Transaction(int idnum, int card_num, int quantity, int mode)
 	type = mode;
 }
 
-int Transaction::get_ID()
+int Log::get_ID()
 {
 	return ID;
 }
 
-int Transaction::get_card_number()
+int Log::get_card_number()
 {
 	return card_number;
 }
 
-int Transaction::get_amount()
+int Log::get_amount()
 {
 	return amount;
 }
 
 
-int Transaction::get_type()
+int Log::get_type()
 {
 	return type;
 }
