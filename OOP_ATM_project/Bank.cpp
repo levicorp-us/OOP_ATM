@@ -16,8 +16,12 @@ Account* Bank::getAcc(string accnum) {
 
 string Bank::getAccPW(string accnum) {
     Account *account = getAcc(accnum);
-    if (!account) return 0;
+    if (!account) return "none";
     return account->get_password();
+}
+
+string Bank::getBankName() {
+    return bank_name;
 }
 
 void Bank::showAccounts() {

@@ -5,9 +5,8 @@ using namespace std;
 void ATMMB::sessionInit() {
 
 }
-...
 
 void ATMMB::sessionMain() {
-
+	sessionInit();
+	while (;;);
 }
-...
